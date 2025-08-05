@@ -27,4 +27,18 @@ await client.set('token', 'abc123', {
   EX: 10,
 });
 
+// Adiciona itens no início
+await client.lPush('tarefas', 'limpar');
+await client.lPush('tarefas', 'estudar');
+await client.lPush('tarefas', 'dormir');
+
+// Mostra toda a lista
+const tarefas = await client.lRange('tarefas', 0, -1);
+console.log(tarefas); // ['dormir', 'estudar', 'limpar']
+
+// Remove o último item
+const ultima = await client.rPop('tarefas');
+console.log('Removido:', ultima);
+
+
 await client.quit();
