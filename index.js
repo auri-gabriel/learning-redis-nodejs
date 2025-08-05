@@ -22,4 +22,9 @@ await client.incr('visitas');
 await client.incr('visitas');
 console.log('Visitas:', await client.get('visitas'));
 
+// TTL - Cache com expiração
+await client.set('token', 'abc123', {
+  EX: 10,
+});
+
 await client.quit();
